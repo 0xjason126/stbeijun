@@ -1,0 +1,38 @@
+{
+  "featured": [
+    {
+      "id": "1",
+      "title": "仰望",
+      "imageUrl": "images/featured/yangwang.jpg",
+      "status": "已售出",
+      "year": "2022",
+      "dimensions": "70x138cm",
+      "description": "仰望，敬畏历史",
+      "artist": "贝军",
+      "statusClass": "red"
+    },
+    {
+      "id": "2",
+      "title": "家乡线条",
+      "imageUrl": "images/featured/jiaxiangxiantiao.jpg",
+      "status": "已售出",
+      "year": "2023",
+      "dimensions": "70x138cm",
+      "description": "家乡线条...",
+      "artist": "贝军",
+      "statusClass": "red"
+    },
+    {
+      "id": "3",
+      "title": "第一课",
+      "imageUrl": "images/featured/diyike.jpg",
+      "status": "售卖中",
+      "year": "2022",
+      "dimensions": "70x138cm",
+      "description": "启蒙老师图",
+      "artist": "贝军",
+      "statusClass": "green"
+    }
+  ],
+  "lastUpdated": "2024-03-19"
+}

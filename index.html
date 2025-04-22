@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>贝军国画 | BeiJun Figure Painting Gallery</title>
+    <!-- TailwindCSS 通过CDN引入 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Preline UI 组件库 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/preline@2.0.3/dist/preline.min.css" />
+    <!-- Font Awesome 图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- AOS 动画库 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+    <!-- 自定义样式 -->
+    <link rel="stylesheet" href="./css/style.css">
+    <script>
+        // 配置Tailwind主题
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f9f7f4',
+                            100: '#f1ede5',
+                            200: '#e5dbc6',
+                            300: '#d4c5a9',
+                            400: '#c3af8c',
+                            500: '#b29a70',
+                            600: '#a08a63',
+                            700: '#8c7851',
+                            800: '#6a5a3e',
+                            900: '#4d422d',
+                        },
+                        ink: {
+                            light: '#343a40',
+                            dark: '#f8f9fa',
+                        },
+                        accent: {
+                            light: '#8c7851',
+                            dark: '#d4c5a9',
+                        },
+                        canvas: {
+                            light: '#f9f7f4',
+                            dark: '#1f2937',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        serif: ['Noto Serif SC', 'serif'],
+                    },
+                    boxShadow: {
+                        'elegant': '0 10px 30px -5px rgba(0, 0, 0, 0.1)',
+                        'elegant-dark': '0 10px 30px -5px rgba(0, 0, 0, 0.3)',
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-canvas-light dark:bg-gray-900 text-ink-light dark:text-ink-dark font-serif transition-colors duration-300 dark-mode-transition page-transition">
+    <!-- 导航栏 -->
+    <header class="sticky top-0 z-50 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 shadow-sm dark:shadow-none">
+        <nav class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center space-x-2 group">
+                <span class="text-2xl font-bold text-gradient">贝军国画</span>
+                <span class="text-sm text-gray-500 dark:text-gray-400 hidden md:inline transition-transform duration-300 group-hover:translate-x-1">| BeiJun Chinese Figure Painting</span>
+            </a>
+            
+            <!-- 导航链接 - 中等屏幕及以上显示 -->
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="index.html" class="text-accent-light dark:text-accent-dark font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:origin-center after:scale-x-0 after:bg-accent-light dark:after:bg-accent-dark after:transition-transform hover:after:scale-x-100">首页 <span class="text-xs text-gray-500 dark:text-gray-400">Home</span></a>
+                <a href="gallery.html" class="hover:text-accent-light dark:hover:text-accent-dark transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:origin-center after:scale-x-0 after:bg-accent-light dark:after:bg-accent-dark after:transition-transform hover:after:scale-x-100">画作展示 <span class="text-xs text-gray-500 dark:text-gray-400">Gallery</span></a>
+                <a href="artists.html" class="hover:text-accent-light dark:hover:text-accent-dark transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:origin-center after:scale-x-0 after:bg-accent-light dark:after:bg-accent-dark after:transition-transform hover:after:scale-x-100">画家介绍 <span class="text-xs text-gray-500 dark:text-gray-400">Artists</span></a>
+            </div>
+            
+            <!-- 右侧功能区 -->
+            <div class="flex items-center space-x-4">
+                
+                <!-- 深色模式切换 -->
+                <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                    <i class="fas fa-moon dark:hidden"></i>
+                    <i class="fas fa-sun hidden dark:block"></i>
+                </button>
+                
+                <!-- 移动端菜单按钮 -->
+                <button id="mobile-menu-button" class="md:hidden p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+        
+        <!-- 移动端菜单 -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
+            <div class="container mx-auto px-4 py-2 flex flex-col space-y-3">
+                <a href="index.html" class="py-2 text-accent-light dark:text-accent-dark font-medium">首页 <span class="text-xs text-gray-500 dark:text-gray-400">Home</span></a>
+                <a href="gallery.html" class="py-2 hover:text-accent-light dark:hover:text-accent-dark transition-colors">画作展示 <span class="text-xs text-gray-500 dark:text-gray-400">Gallery</span></a>
+                <a href="artists.html" class="py-2 hover:text-accent-light dark:hover:text-accent-dark transition-colors">画家介绍 <span class="text-xs text-gray-500 dark:text-gray-400">Artists</span></a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主页横幅 -->
+    <section class="relative h-[80vh] overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-black/40 to-black/60 z-10"></div>
+        <img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2344&q=80" 
+             alt="背景" 
+             class="absolute inset-0 w-full h-full object-cover object-center scale-105 animate-[slowZoom_20s_ease-in-out_infinite_alternate]">
+        <div class="container mx-auto px-4 h-full flex items-center relative z-20">
+            <div class="max-w-2xl" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 tracking-tight">贝军国画</h1>
+                <p class="text-xl md:text-2xl text-white/90 mb-8 font-light">BeiJun Chinese Figure Painting Gallery</p>
+                <p class="text-lg text-white/80 mb-10 leading-relaxed">中国人物国画，抒写国情，勾画民心。传统与现代的完美融合。</p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="gallery.html" class="px-6 py-3 bg-white/90 hover:bg-white text-gray-900 rounded-lg transition-all font-medium shadow-lg hover:shadow-xl hover:-translate-y-1 btn-hover-effect">浏览画作 <span class="text-xs text-gray-500">View Gallery</span></a>
+                    <a href="artists.html" class="px-6 py-3 bg-transparent border border-white/70 hover:bg-white/10 text-white rounded-lg transition-all font-medium hover:-translate-y-1">认识画家 <span class="text-xs text-white/70">Meet Artists</span></a>
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black/30 to-transparent z-10"></div>
+    </section>
+
+    <!-- 特色画作 -->
+    <section class="py-20 bg-canvas-light dark:bg-gray-800/50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl font-bold mb-4 inline-block relative">
+                    <span class="text-gradient">精选画作</span> 
+                    <span class="text-sm text-gray-500 dark:text-gray-400">Featured Works</span>
+                    <span class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-0.5 bg-accent-light dark:bg-accent-dark"></span>
+                </h2>
+                <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mt-6">展示近期最具代表性的中国人物国画作品</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <!-- 画作卡片 1 -->
+                <div class="group relative bg-white dark:bg-gray-900 rounded-lg overflow-hidden shadow-elegant dark:shadow-elegant-dark transition-all duration-300 hover:-translate-y-2 card-shadow painting-card" data-id="1" data-aos="fade-up" data-aos-delay="100">
+                    <div class="aspect-[2/3] overflow-hidden img-hover-zoom elegant-border">
+                        <img src="" 
+                             alt="" 
+                             class="w-full h-full object-cover object-center transition-transform duration-700">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-3">
+                            <h3 class="text-xl font-bold painting-title"></h3>
+                            <span class="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 text-xs rounded-full painting-status"></span>
+                        </div>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mb-3 painting-year"></p>
+                        <p class="text-gray-600 dark:text-gray-300 leading-relaxed line-clamp-2 painting-description"></p>
+                    </div>
+                </div>
+                
+                <!-- 画作卡片 2 -->
+                <div class="group relative bg-white dark:bg-gray-900 rounded-lg overflow-hidden shadow-elegant dark:shadow-elegant-dark transition-all duration-300 hover:-translate-y-2 card-shadow painting-card" data-id="2" data-aos="fade-up" data-aos-delay="200">
+                    <div class="aspect-[2/3] overflow-hidden img-hover-zoom elegant-border">
+                        <img src="" 
+                             alt="" 
+                             class="w-full h-full object-cover object-center transition-transform duration-700">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-3">
+                            <h3 class="text-xl font-bold painting-title"></h3>
+                            <span class="px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 text-xs rounded-full painting-status"></span>
+                        </div>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mb-3 painting-year"></p>
+                        <p class="text-gray-600 dark:text-gray-300 leading-relaxed line-clamp-2 painting-description"></p>
+                    </div>
+                </div>
+                
+                <!-- 画作卡片 3 -->
+                <div class="group relative bg-white dark:bg-gray-900 rounded-lg overflow-hidden shadow-elegant dark:shadow-elegant-dark transition-all duration-300 hover:-translate-y-2 card-shadow painting-card" data-id="3" data-aos="fade-up" data-aos-delay="300">
+                    <div class="aspect-[2/3] overflow-hidden img-hover-zoom elegant-border">
+                        <img src="" 
+                             alt="" 
+                             class="w-full h-full object-cover object-center transition-transform duration-700">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-3">
+                            <h3 class="text-xl font-bold painting-title"></h3>
+                            <span class="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 text-xs rounded-full painting-status"></span>
+                        </div>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mb-3 painting-year"></p>
+                        <p class="text-gray-600 dark:text-gray-300 leading-relaxed line-clamp-2 painting-description"></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-14" data-aos="fade-up" data-aos-delay="400">
+                <a href="gallery.html" class="inline-flex items-center px-6 py-3 bg-accent-light dark:bg-accent-dark text-white rounded-lg hover:bg-opacity-90 dark:hover:bg-opacity-90 transition-all font-medium shadow-md hover:shadow-lg hover:-translate-y-1 btn-hover-effect">
+                    查看更多画作 <span class="ml-2"><i class="fas fa-arrow-right"></i></span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="py-10 bg-gray-100 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+        <div class="container mx-auto px-4">
+            <div class="text-center">
+                <p class="text-gray-600 dark:text-gray-300">&copy; <span id="current-year"></span> 贝军国画 | BeiJun Chinese Figure Painting. 保留所有权利</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 引入JavaScript模块 -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/preline@2.0.3/dist/preline.min.js"></script>
+    <script src="./js/common.js"></script>
+    <script src="./js/data/featuredData.js"></script>
+    <script src="./js/utils/imageUtils.js"></script>
+    <script src="./js/index.js"></script>
+    <script>
+        // 设置页脚年份
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // 初始化AOS动画
+        AOS.init({
+            once: true,
+            offset: 100,
+            duration: 800
+        });
+        
+        // 添加慢缩放动画
+        document.head.insertAdjacentHTML('beforeend', `
+            <style>
+                @keyframes slowZoom {
+                    from { transform: scale(1); }
+                    to { transform: scale(1.1); }
+                }
+            </style>
+        `);
+        
+        // 修复模态框定位问题
+        document.addEventListener('DOMContentLoaded', function() {
+            const paintingCards = document.querySelectorAll('.painting-card');
+            const modal = document.getElementById('painting-modal');
+            const closeModal = document.getElementById('close-modal');
+            const modalBackdrop = document.getElementById('modal-backdrop');
+            
+            // 计算滚动条宽度并设置CSS变量
+            const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+            document.documentElement.style.setProperty('--scrollbar-width', `${scrollbarWidth}px`);
+            
+            // 点击画作卡片时显示模态框
+            paintingCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    // 显示模态框
+                    modal.classList.remove('hidden');
+                    
+                    // 禁止背景滚动
+                    document.body.classList.add('modal-open');
+                });
+            });
+            
+            // 关闭模态框
+            if (closeModal) {
+                closeModal.addEventListener('click', function() {
+                    modal.classList.add('hidden');
+                    document.body.classList.remove('modal-open');
+                });
+            }
+            
+            // 点击背景关闭模态框
+            if (modalBackdrop) {
+                modalBackdrop.addEventListener('click', function() {
+                    modal.classList.add('hidden');
+                    document.body.classList.remove('modal-open');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

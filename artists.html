@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>画家介绍 | 中国人物国画展示</title>
+    <!-- TailwindCSS 通过CDN引入 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Preline UI 组件库 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/preline@2.0.3/dist/preline.min.css" />
+    <!-- Font Awesome 图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- AOS 动画库 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+    <!-- 自定义样式 -->
+    <link rel="stylesheet" href="./css/style.css">
+    <script>
+        // 配置Tailwind主题
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f9f7f4',
+                            100: '#f1ede5',
+                            200: '#e5dbc6',
+                            300: '#d4c5a9',
+                            400: '#c3af8c',
+                            500: '#b29a70',
+                            600: '#a08a63',
+                            700: '#8c7851',
+                            800: '#6a5a3e',
+                            900: '#4d422d',
+                        },
+                        ink: {
+                            light: '#343a40',
+                            dark: '#f8f9fa',
+                        },
+                        accent: {
+                            light: '#8c7851',
+                            dark: '#d4c5a9',
+                        },
+                        canvas: {
+                            light: '#f9f7f4',
+                            dark: '#1f2937',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        serif: ['Noto Serif SC', 'serif'],
+                    },
+                    boxShadow: {
+                        'elegant': '0 10px 30px -5px rgba(0, 0, 0, 0.1)',
+                        'elegant-dark': '0 10px 30px -5px rgba(0, 0, 0, 0.3)',
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-canvas-light dark:bg-gray-900 text-ink-light dark:text-ink-dark font-serif transition-colors duration-300 dark-mode-transition page-transition">
+    <!-- 导航栏 -->
+    <header class="sticky top-0 z-50 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 shadow-sm dark:shadow-none">
+        <nav class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center space-x-2 group">
+                <span class="text-2xl font-bold text-gradient">贝军国画</span>
+                <span class="text-sm text-gray-500 dark:text-gray-400 hidden md:inline transition-transform duration-300 group-hover:translate-x-1">| BeiJun Chinese Figure Painting</span>
+            </a>
+            
+            <!-- 导航链接 - 中等屏幕及以上显示 -->
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="index.html" class="hover:text-accent-light dark:hover:text-accent-dark transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:origin-center after:scale-x-0 after:bg-accent-light dark:after:bg-accent-dark after:transition-transform hover:after:scale-x-100">首页 <span class="text-xs text-gray-500 dark:text-gray-400">Home</span></a>
+                <a href="gallery.html" class="hover:text-accent-light dark:hover:text-accent-dark transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:origin-center after:scale-x-0 after:bg-accent-light dark:after:bg-accent-dark after:transition-transform hover:after:scale-x-100">画作展示 <span class="text-xs text-gray-500 dark:text-gray-400">Gallery</span></a>
+                <a href="artists.html" class="text-accent-light dark:text-accent-dark font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:origin-center after:scale-x-0 after:bg-accent-light dark:after:bg-accent-dark after:transition-transform hover:after:scale-x-100">画家介绍 <span class="text-xs text-gray-500 dark:text-gray-400">Artists</span></a>
+            </div>
+            
+            <!-- 右侧功能区 -->
+            <div class="flex items-center space-x-4">
+                <!-- 深色模式切换 -->
+                <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                    <i class="fas fa-moon dark:hidden"></i>
+                    <i class="fas fa-sun hidden dark:block"></i>
+                </button>
+                
+                <!-- 移动端菜单按钮 -->
+                <button id="mobile-menu-button" class="md:hidden p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+        
+        <!-- 移动端菜单 -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
+            <div class="container mx-auto px-4 py-2 flex flex-col space-y-3">
+                <a href="index.html" class="py-2 hover:text-accent-light dark:hover:text-accent-dark transition-colors">首页 <span class="text-xs text-gray-500 dark:text-gray-400">Home</span></a>
+                <a href="gallery.html" class="py-2 hover:text-accent-light dark:hover:text-accent-dark transition-colors">画作展示 <span class="text-xs text-gray-500 dark:text-gray-400">Gallery</span></a>
+                <a href="artists.html" class="py-2 text-accent-light dark:text-accent-dark font-medium">画家介绍 <span class="text-xs text-gray-500 dark:text-gray-400">Artists</span></a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 页面标题 -->
+    <section class="py-16 bg-canvas-light dark:bg-gray-800/50">
+        <div class="container mx-auto px-4" data-aos="fade-up">
+            <h1 class="text-3xl md:text-4xl font-bold mb-4 inline-block relative">
+                <span class="text-gradient">画家介绍</span> 
+                <span class="text-sm text-gray-500 dark:text-gray-400">Artist</span>
+                <span class="absolute -bottom-2 left-0 w-16 h-0.5 bg-accent-light dark:bg-accent-dark"></span>
+            </h1>
+            <p class="text-gray-600 dark:text-gray-300 max-w-3xl mt-4">了解这位致力于传承与创新中国人物画艺术的当代杰出画家</p>
+        </div>
+    </section>
+
+    <!-- 画家列表 -->
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 gap-16">
+                <!-- 贝军 -->
+                <div id="zhang-daqian" class="scroll-mt-24">
+                    <div class="flex flex-col lg:flex-row gap-12">
+                        <!-- 画家照片 -->
+                        <div class="lg:w-1/3" data-aos="fade-right">
+                            <div class="aspect-[0.534] overflow-hidden rounded-lg shadow-elegant dark:shadow-elegant-dark relative elegant-border img-hover-zoom">
+                                <img src="./images/artists/beijun.jpg" 
+                                     alt="贝军" 
+                                     class="w-full h-full object-contain">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- 画家信息 -->
+                        <div class="lg:w-2/3" data-aos="fade-left">
+                            <h2 class="text-3xl font-bold mb-6 inline-block relative">
+                                <span class="text-gradient">贝军</span> 
+                                <span class="text-xl font-normal text-gray-500 dark:text-gray-400 ml-2">Bei Jun</span>
+                                <span class="absolute -bottom-2 left-0 w-16 h-0.5 bg-accent-light dark:bg-accent-dark"></span>
+                            </h2>
+                            
+                            <div class="prose prose-lg dark:prose-invert max-w-none">
+                                <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">贝军，男，中国广东省汕头市人，现定居深圳市；湖社画会会员，热衷国画人物画研发；作品二零零八年入市，有收益；同时频繁参加国内外各类型书画赛展，有捡奖。</p>
+                                
+                                <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-8">贝军的国画人物画作品，主题以现实主义为主，兼顾历史题材；表现形式以传统线描、墨韵混合的小写意为主，兼顾西画的光线和透视——力求创造适合市场的新模式。</p>
+                                                                
+                                <div class="bg-white/50 dark:bg-gray-800/50 p-6 rounded-lg shadow-sm mb-8 border border-gray-100 dark:border-gray-700">
+                                    <h3 class="text-xl font-bold mb-4 text-accent-light dark:text-accent-dark">代表作品</h3>
+                                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                        <li class="flex items-center">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-accent-light dark:bg-accent-dark mr-2"></span>
+                                            《仰望》
+                                        </li>
+                                        <li class="flex items-center">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-accent-light dark:bg-accent-dark mr-2"></span>
+                                            《第一课》
+                                        </li>
+                                        <li class="flex items-center">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-accent-light dark:bg-accent-dark mr-2"></span>
+                                            《家乡线条》
+                                        </li>
+                                        <li class="flex items-center">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-accent-light dark:bg-accent-dark mr-2"></span>
+                                            《世情话》
+                                        </li>
+                                    </ul>
+                                </div>
+                                
+                                <div>
+                                    <h3 class="text-xl font-bold mb-4 text-accent-light dark:text-accent-dark">艺术成就</h3>
+                                    <p class="text-gray-700 dark:text-gray-300 leading-relaxed">试图通过书画展赛、画廊、网商的渠道，推进展现现代中国画人物画价值的新业态，为现代中国画的发展及其从业者的收益，发挥自身的作用。</p>
+                                </div>
+                                
+                                <div class="mt-10">
+                                    <a href="gallery.html" class="inline-flex items-center px-6 py-3 bg-accent-light dark:bg-accent-dark text-white rounded-lg hover:bg-opacity-90 dark:hover:bg-opacity-90 transition-all font-medium shadow-md hover:shadow-lg hover:-translate-y-1 btn-hover-effect">
+                                        浏览作品集 <span class="ml-2"><i class="fas fa-arrow-right"></i></span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 艺术理念 -->
+    <section class="py-20 bg-white dark:bg-gray-900/50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl font-bold mb-4 inline-block relative">
+                    <span class="text-gradient">艺术理念</span>
+                    <span class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-0.5 bg-accent-light dark:bg-accent-dark"></span>
+                </h2>
+                <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mt-6">传统与现代的融合，东方与西方的对话</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+                <!-- 理念卡片 1 -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-8 shadow-elegant dark:shadow-elegant-dark transition-all duration-300 hover:-translate-y-2 card-shadow" data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-accent-light dark:text-accent-dark text-4xl mb-6">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">传统技法创新</h3>
+                    <p class="text-gray-600 dark:text-gray-300 leading-relaxed">在传承传统线描技法的基础上，融合现代绘画元素，创造富有时代感的表现形式。</p>
+                </div>
+                
+                <!-- 理念卡片 2 -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-8 shadow-elegant dark:shadow-elegant-dark transition-all duration-300 hover:-translate-y-2 card-shadow" data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-accent-light dark:text-accent-dark text-4xl mb-6">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">现实主义表达</h3>
+                    <p class="text-gray-600 dark:text-gray-300 leading-relaxed">以现实主义为主要创作方向，通过人物形象传递情感，反映社会现实与人文精神。</p>
+                </div>
+                
+                <!-- 理念卡片 3 -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-8 shadow-elegant dark:shadow-elegant-dark transition-all duration-300 hover:-translate-y-2 card-shadow" data-aos="fade-up" data-aos-delay="300">
+                    <div class="text-accent-light dark:text-accent-dark text-4xl mb-6">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">东西方美学融合</h3>
+                    <p class="text-gray-600 dark:text-gray-300 leading-relaxed">汲取西方绘画的光影与透视技巧，结合东方水墨的意境表达，创造独特的艺术语言。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 返回顶部按钮 -->
+    <button id="back-to-top" class="fixed bottom-6 right-6 p-3 rounded-full bg-accent-light dark:bg-accent-dark text-white shadow-lg opacity-0 invisible transition-all duration-300 hover:bg-opacity-90 dark:hover:bg-opacity-90 hover:-translate-y-1">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- 页脚 -->
+    <footer class="py-10 bg-gray-100 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+        <div class="container mx-auto px-4">
+            <div class="text-center">
+                <p class="text-gray-600 dark:text-gray-300">&copy; <span id="current-year"></span> 贝军国画 | BeiJun Chinese Figure Painting. 保留所有权利。</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 引入JavaScript模块 -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/preline@2.0.3/dist/preline.min.js"></script>
+    <script src="./js/common.js"></script>
+    <script>
+        // 设置页脚年份
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // 初始化AOS动画
+        AOS.init({
+            once: true,
+            offset: 100,
+            duration: 800
+        });
+        
+        // 处理URL参数和锚点滚动
+        document.addEventListener('DOMContentLoaded', () => {
+            // 检查URL参数，如果有锚点则滚动到对应位置
+            const hash = window.location.hash;
+            if (hash) {
+                const element = document.querySelector(hash);
+                if (element) {
+                    setTimeout(() => {
+                        element.scrollIntoView({ behavior: 'smooth' });
+                    }, 300);
+                }
+            }
+            
+            // 处理从gallery.html传来的artist参数
+            const urlParams = new URLSearchParams(window.location.search);
+            const artist = urlParams.get('artist');
+            if (artist) {
+                let elementId;
+                switch(artist) {
+                    case '贝军':
+                        elementId = 'zhang-daqian';
+                        break;
+                }
+                
+                if (elementId) {
+                    const element = document.getElementById(elementId);
+                    if (element) {
+                        setTimeout(() => {
+                            element.scrollIntoView({ behavior: 'smooth' });
+                        }, 300);
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
