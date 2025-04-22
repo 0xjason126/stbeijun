@@ -76,12 +76,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 初始化精选画作
     initFeaturedPaintings();
-
-
-        }
-      ]
-    }
-  }
-}
-```
 });
