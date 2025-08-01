@@ -227,8 +227,57 @@ body.modal-open {
 /* 响应式调整 */
 @media (max-width: 640px) {
   .container {
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  /* 移动端标题优化 */
+  h1 {
+    line-height: 1.1;
+    word-break: keep-all;
+  }
+  
+  /* 按钮优化 */
+  .btn-hover-effect {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* 导航优化 */
+  .sticky {
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+  
+  /* 画廊卡片优化 */
+  .painting-card {
+    margin-bottom: 1rem;
+  }
+  
+  /* 模态框移动端优化 */
+  .modal-content-container {
+    margin: 1rem;
+    max-height: calc(100vh - 2rem);
+  }
+}
+
+/* 平板端优化 */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  
+  /* 画廊网格优化 */
+  #gallery-container {
+    gap: 1.5rem;
+  }
+  
+  /* 筛选工具栏优化 */
+  .flex-wrap {
+    gap: 1rem;
   }
 }
 
@@ -410,4 +459,13 @@ section.py-6.border-t-0.border-b.border-gray-200.dark\:border-gray-800.sticky.to
 
 .elegant-border:hover::after {
   opacity: 1;
+}
+
+/* 画作卡片标题样式 - 使用更具体的选择器 */
+.painting-card .painting-title {
+  color: #1f2937; /* 浅色模式：深灰色 */
+}
+
+.dark .painting-card .painting-title {
+  color: #f9fafb; /* 深色模式：浅白色 */
 }
