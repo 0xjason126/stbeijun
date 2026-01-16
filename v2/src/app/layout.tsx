@@ -102,6 +102,17 @@ const themeScript = `
   })();
 `;
 
+// 头条搜索推送脚本
+const toutiaoScript = `
+  (function(){
+    var el = document.createElement("script");
+    el.src = "https://lf1-cdn-tos.bytegoofy.com/goofy/ttzz/push.js?321d6316bd0d2cf492112dd454e8ba4cdc0343fdf601123dc71a5d9b413d80bfbc434964556b7d7129e9b750ed197d397efd7b0c6c715c1701396e1af40cec962b8d7c8c6655c9b00211740aa8a98e2e";
+    el.id = "ttzz";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(el, s);
+  })(window)
+`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -111,6 +122,11 @@ export default function RootLayout({
     <html lang="zh-CN" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <script dangerouslySetInnerHTML={{ __html: toutiaoScript }} />
+        {/* 头条搜索时间标签 */}
+        <meta property="bytedance:published_time" content="2024-01-01T00:00:00+08:00" />
+        <meta property="bytedance:lrDate_time" content="2025-01-16T00:00:00+08:00" />
+        <meta property="bytedance:updated_time" content="2025-01-16T00:00:00+08:00" />
       </head>
       <body
         className={`${notoSerifSC.variable} ${notoSansSC.variable} ${inter.variable} font-sans antialiased`}
