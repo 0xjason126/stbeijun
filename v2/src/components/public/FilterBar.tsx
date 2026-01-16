@@ -190,7 +190,7 @@ export function FilterBar({ years, onFilterChange, initialFilters }: FilterBarPr
   ];
 
   return (
-    <div className="sticky top-24 lg:top-28 z-40 bg-background/95 backdrop-blur-lg border-b border-border">
+    <div className="sticky top-0 z-40 bg-background/95 backdrop-blur-lg border-b border-border">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
         <div className="flex flex-wrap gap-3 items-center">
           {/* 年份筛选 - 自定义下拉 */}
