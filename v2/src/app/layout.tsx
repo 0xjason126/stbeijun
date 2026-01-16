@@ -34,6 +34,8 @@ export const metadata: Metadata = {
   description: "贝军，当代国画艺术家。专注于传统水墨画创作，将东方美学与现代艺术融合。浏览作品集，了解艺术历程。",
   other: {
     "bytedance-verification-code": "ZH+AcLYsj6gW2AAa+mFD",
+    "bytedance-verification-code": "GwIaYhSS+DtGim2vvKYN",
+
   },
   keywords: [
     "贝军",
