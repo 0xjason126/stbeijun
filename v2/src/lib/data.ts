@@ -2,7 +2,7 @@
  * 数据层工具 - Supabase 版本
  */
 import { createAdminClient } from "./supabase/server";
-import type { DbPainting, DbArtist, DbArtistTimeline } from "./supabase/types";
+import type { DbPainting, DbArtist, DbArtistTimeline, DbSiteSettings } from "./supabase/types";
 import type {
   Painting,
   PaintingFilters,
@@ -47,7 +47,7 @@ function toArtist(row: DbArtist, timeline: DbArtistTimeline[]): Artist {
     avatarUrl: row.avatar_url ?? "/images/artists/default.jpg",
     bio: row.bio ?? "",
     timeline: timeline.map((t) => ({
-      year: String(t.year),
+      year: t.year,
       title: t.title,
       description: t.description ?? undefined,
     })),
@@ -106,7 +106,7 @@ export async function getPaintings(
     return [];
   }
 
-  return (data ?? []).map(toPainting);
+  return ((data ?? []) as DbPainting[]).map(toPainting);
 }
 
 /**
@@ -125,7 +125,7 @@ export async function getPainting(id: string): Promise<Painting | null> {
     return null;
   }
 
-  return toPainting(data);
+  return toPainting(data as DbPainting);
 }
 
 /**
@@ -148,7 +148,7 @@ export async function getYears(): Promise<number[]> {
     return [];
   }
 
-  const years = new Set(data.map((p) => p.year));
+  const years = new Set<number>(data.map((p: { year: number }) => p.year));
   return [...years].sort((a, b) => b - a);
 }
 
@@ -165,7 +165,7 @@ export async function createPainting(
     .from("paintings")
     .select("slug")
     .order("slug", { ascending: false })
-    .limit(1);
+    .limit(1) as { data: { slug: string }[] | null };
 
   const maxNum = existing?.[0]
     ? parseInt(existing[0].slug.replace("p", ""), 10)
@@ -177,7 +177,7 @@ export async function createPainting(
     .from("paintings")
     .select("sort_order")
     .order("sort_order", { ascending: false })
-    .limit(1);
+    .limit(1) as { data: { sort_order: number }[] | null };
 
   const maxOrder = orderData?.[0]?.sort_order ?? 0;
 
@@ -202,7 +202,7 @@ export async function createPainting(
     throw new Error("Failed to create painting");
   }
 
-  return toPainting(data);
+  return toPainting(data as DbPainting);
 }
 
 /**
@@ -238,7 +238,7 @@ export async function updatePainting(
     return null;
   }
 
-  return toPainting(data);
+  return toPainting(data as DbPainting);
 }
 
 /**
@@ -277,7 +277,7 @@ export async function getArtist(): Promise<Artist> {
     .from("artist")
     .select("*")
     .limit(1)
-    .single();
+    .single() as { data: DbArtist | null; error: unknown };
 
   if (artistError || !artistData) {
     // 返回默认值
@@ -295,7 +295,7 @@ export async function getArtist(): Promise<Artist> {
     .from("artist_timeline")
     .select("*")
     .eq("artist_id", artistData.id)
-    .order("sort_order", { ascending: true });
+    .order("sort_order", { ascending: true }) as { data: DbArtistTimeline[] | null };
 
   return toArtist(artistData, timelineData ?? []);
 }
@@ -338,7 +338,7 @@ export async function updateArtist(input: Partial<Artist>): Promise<Artist> {
       await supabase.from("artist_timeline").insert(
         input.timeline.map((item, index) => ({
           artist_id: existing.id,
-          year: parseInt(item.year, 10),
+          year: item.year,
           title: item.title,
           description: item.description ?? null,
           sort_order: index,
@@ -360,7 +360,7 @@ export async function updateArtist(input: Partial<Artist>): Promise<Artist> {
 export async function getSettings(): Promise<SettingsData> {
   const supabase = createAdminClient();
 
-  const { data } = await supabase.from("site_settings").select("*");
+  const { data } = await supabase.from("site_settings").select("*") as { data: DbSiteSettings[] | null };
 
   const settings: SettingsData = {
     site: {
@@ -384,9 +384,9 @@ export async function getSettings(): Promise<SettingsData> {
   if (data) {
     for (const row of data) {
       if (row.key === "site") {
-        settings.site = row.value as SiteSettings;
+        settings.site = row.value as unknown as SiteSettings;
       } else if (row.key === "home") {
-        settings.home = row.value as HomeSettings;
+        settings.home = row.value as unknown as HomeSettings;
       }
     }
   }
@@ -467,22 +467,22 @@ export async function getFeaturedPaintings(): Promise<Painting[]> {
   }
 
   // 获取对应的画作
-  const paintingIds = featured.map((f) => f.painting_id);
+  const paintingIds = featured.map((f: { painting_id: string }) => f.painting_id);
   const { data: paintings } = await supabase
     .from("paintings")
     .select("*")
     .in("id", paintingIds)
-    .eq("published", true);
+    .eq("published", true) as { data: DbPainting[] | null };
 
   if (!paintings) {
     return [];
   }
 
   // 按 featured 顺序排列
-  const paintingMap = new Map(paintings.map((p) => [p.id, p]));
+  const paintingMap = new Map<string, DbPainting>(paintings.map((p) => [p.id, p]));
   return featured
-    .map((f) => paintingMap.get(f.painting_id))
-    .filter((p): p is DbPainting => p !== undefined)
+    .map((f: { painting_id: string }) => paintingMap.get(f.painting_id))
+    .filter((p: DbPainting | undefined): p is DbPainting => p !== undefined)
     .map(toPainting);
 }
 
@@ -500,7 +500,7 @@ export async function updateFeaturedPaintings(slugs: string[]): Promise<void> {
 
   if (!paintings) return;
 
-  const slugToId = new Map(paintings.map((p) => [p.slug, p.id]));
+  const slugToId = new Map(paintings.map((p: { slug: string; id: string }) => [p.slug, p.id]));
 
   // 清空现有精选
   await supabase.from("featured_paintings").delete().neq("id", "");

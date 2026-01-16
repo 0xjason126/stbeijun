@@ -54,6 +54,7 @@ export interface Database {
           created_at?: string;
           updated_at?: string;
         };
+        Relationships: [];
       };
       artist: {
         Row: {
@@ -80,6 +81,7 @@ export interface Database {
           bio?: string | null;
           updated_at?: string;
         };
+        Relationships: [];
       };
       artist_timeline: {
         Row: {
@@ -106,6 +108,15 @@ export interface Database {
           description?: string | null;
           sort_order?: number;
         };
+        Relationships: [
+          {
+            foreignKeyName: "artist_timeline_artist_id_fkey";
+            columns: ["artist_id"];
+            isOneToOne: false;
+            referencedRelation: "artist";
+            referencedColumns: ["id"];
+          }
+        ];
       };
       site_settings: {
         Row: {
@@ -123,6 +134,7 @@ export interface Database {
           value?: Record<string, unknown>;
           updated_at?: string;
         };
+        Relationships: [];
       };
       featured_paintings: {
         Row: {
@@ -143,11 +155,23 @@ export interface Database {
           sort_order?: number;
           created_at?: string;
         };
+        Relationships: [
+          {
+            foreignKeyName: "featured_paintings_painting_id_fkey";
+            columns: ["painting_id"];
+            isOneToOne: false;
+            referencedRelation: "paintings";
+            referencedColumns: ["id"];
+          }
+        ];
       };
     };
+    Views: Record<string, never>;
+    Functions: Record<string, never>;
     Enums: {
       painting_status: PaintingStatus;
     };
+    CompositeTypes: Record<string, never>;
   };
 }
 

@@ -43,7 +43,7 @@ export function PaintingEditForm({ painting }: PaintingEditFormProps) {
         dimensions: dimensions.trim() || undefined,
       });
 
-      if (result.error) {
+      if ("error" in result) {
         setError(result.error);
       } else {
         router.push("/admin/paintings");
