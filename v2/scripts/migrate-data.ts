@@ -159,6 +159,7 @@ async function migrateArtist(urlMap: Map<string, UrlMapping>): Promise<void> {
 
     for (let i = 0; i < artist.timeline.length; i++) {
       const item = artist.timeline[i];
+      if (!item) continue;
       const { error } = await supabase.from("artist_timeline").insert({
         artist_id: artistData.id,
         year: parseInt(item.year, 10),

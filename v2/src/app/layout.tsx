@@ -48,7 +48,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "贝军" }],
   creator: "贝军",
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://beijun.art"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://stbeijun.art"),
   alternates: {
     canonical: "/",
   },
