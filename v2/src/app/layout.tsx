@@ -34,8 +34,6 @@ export const metadata: Metadata = {
   description: "贝军，当代国画艺术家。专注于传统水墨画创作，将东方美学与现代艺术融合。浏览作品集，了解艺术历程。",
   other: {
     "bytedance-verification-code": "ZH+AcLYsj6gW2AAa+mFD",
-    "bytedance-verification-code": "GwIaYhSS+DtGim2vvKYN",
-
   },
   keywords: [
     "贝军",
@@ -123,6 +121,8 @@ export default function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <script dangerouslySetInnerHTML={{ __html: toutiaoScript }} />
+        {/* 头条搜索验证码（第二个） */}
+        <meta name="bytedance-verification-code" content="GwIaYhSS+DtGim2vvKYN" />
         {/* 头条搜索时间标签 */}
         <meta property="bytedance:published_time" content="2024-01-01T00:00:00+08:00" />
         <meta property="bytedance:lrDate_time" content="2025-01-16T00:00:00+08:00" />
