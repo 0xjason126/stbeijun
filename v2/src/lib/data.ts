@@ -14,6 +14,17 @@ import type {
 } from "@/types";
 
 // ========================================
+// 环境变量检查
+// ========================================
+
+/**
+ * 检查 Supabase 环境变量是否可用
+ */
+function hasSupabaseEnv(): boolean {
+  return !!(process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY);
+}
+
+// ========================================
 // 类型转换函数
 // ========================================
 
@@ -64,6 +75,11 @@ function toArtist(row: DbArtist, timeline: DbArtistTimeline[]): Artist {
 export async function getPaintings(
   filters?: PaintingFilters
 ): Promise<Painting[]> {
+  // 如果环境变量不完整，返回空数组
+  if (!hasSupabaseEnv()) {
+    return [];
+  }
+
   const supabase = createAdminClient();
 
   let query = supabase
@@ -137,6 +153,11 @@ export const getPaintingById = getPainting;
  * 获取所有年份（用于筛选下拉）
  */
 export async function getYears(): Promise<number[]> {
+  // 如果环境变量不完整，返回空数组
+  if (!hasSupabaseEnv()) {
+    return [];
+  }
+
   const supabase = createAdminClient();
 
   const { data, error } = await supabase
@@ -271,6 +292,20 @@ export async function togglePublished(id: string): Promise<Painting | null> {
  * 获取画家信息
  */
 export async function getArtist(): Promise<Artist> {
+  // 默认画家信息
+  const defaultArtist: Artist = {
+    name: "贝军",
+    title: "国画艺术家",
+    avatarUrl: "/images/artists/beijun.jpg",
+    bio: "",
+    timeline: [],
+  };
+
+  // 如果环境变量不完整，返回默认值
+  if (!hasSupabaseEnv()) {
+    return defaultArtist;
+  }
+
   const supabase = createAdminClient();
 
   const { data: artistData, error: artistError } = await supabase
@@ -281,13 +316,7 @@ export async function getArtist(): Promise<Artist> {
 
   if (artistError || !artistData) {
     // 返回默认值
-    return {
-      name: "贝军",
-      title: "国画艺术家",
-      avatarUrl: "/images/artists/beijun.jpg",
-      bio: "",
-      timeline: [],
-    };
+    return defaultArtist;
   }
 
   // 获取时间线
@@ -358,11 +387,7 @@ export async function updateArtist(input: Partial<Artist>): Promise<Artist> {
  * 获取网站设置
  */
 export async function getSettings(): Promise<SettingsData> {
-  const supabase = createAdminClient();
-
-  const { data } = await supabase.from("site_settings").select("*") as { data: DbSiteSettings[] | null };
-
-  const settings: SettingsData = {
+  const defaultSettings: SettingsData = {
     site: {
       siteName: "贝军国画",
       wechatId: "",
@@ -381,17 +406,26 @@ export async function getSettings(): Promise<SettingsData> {
     lastUpdated: new Date().toISOString(),
   };
 
+  // 如果环境变量不完整，返回默认值
+  if (!hasSupabaseEnv()) {
+    return defaultSettings;
+  }
+
+  const supabase = createAdminClient();
+
+  const { data } = await supabase.from("site_settings").select("*") as { data: DbSiteSettings[] | null };
+
   if (data) {
     for (const row of data) {
       if (row.key === "site") {
-        settings.site = row.value as unknown as SiteSettings;
+        defaultSettings.site = row.value as unknown as SiteSettings;
       } else if (row.key === "home") {
-        settings.home = row.value as unknown as HomeSettings;
+        defaultSettings.home = row.value as unknown as HomeSettings;
       }
     }
   }
 
-  return settings;
+  return defaultSettings;
 }
 
 /**
@@ -454,6 +488,11 @@ export async function updateSiteSettings(
  * 获取精选画作
  */
 export async function getFeaturedPaintings(): Promise<Painting[]> {
+  // 如果环境变量不完整，返回空数组
+  if (!hasSupabaseEnv()) {
+    return [];
+  }
+
   const supabase = createAdminClient();
 
   // 从 featured_paintings 表获取，按 sort_order 排序

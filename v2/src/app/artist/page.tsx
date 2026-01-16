@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Navbar, ScrollProgress, Footer, PersonSchema, FAQSchema } from "@/components/public";
+import { Navbar, ScrollProgress, Footer, PersonSchema, FAQSchema, BreadcrumbSchema } from "@/components/public";
 import { Timeline } from "@/components/public/Timeline";
 import { getArtist } from "@/lib/data";
 
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 
 export default async function ArtistPage() {
   const artist = await getArtist();
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://beijun.art";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://stbeijun.art";
 
   // FAQ 数据（用于 GEO 优化）
   const faqs = [
@@ -44,6 +44,12 @@ export default async function ArtistPage() {
   return (
     <>
       {/* 结构化数据 */}
+      <BreadcrumbSchema
+        items={[
+          { name: "首页", url: siteUrl },
+          { name: "画家介绍", url: `${siteUrl}/artist` },
+        ]}
+      />
       <PersonSchema artist={artist} siteUrl={siteUrl} />
       <FAQSchema faqs={faqs} />
 
