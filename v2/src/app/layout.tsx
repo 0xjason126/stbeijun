@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Noto_Serif_SC, Noto_Sans_SC, Inter } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 // 衬线字体 - 用于标题
@@ -110,6 +111,7 @@ export default function RootLayout({
         className={`${notoSerifSC.variable} ${notoSansSC.variable} ${inter.variable} font-sans antialiased`}
       >
         {children}
+        <Analytics />
       </body>
     </html>
   );
