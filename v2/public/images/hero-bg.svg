@@ -1,0 +1,69 @@
+<svg width="2400" height="1350" viewBox="0 0 2400 1350" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- 水墨渐变 -->
+    <radialGradient id="inkWash" cx="0.3" cy="0.2" r="0.8">
+      <stop offset="0%" stop-color="#f8f9fa" stop-opacity="0.95"/>
+      <stop offset="40%" stop-color="#e9ecef" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#343a40" stop-opacity="0.3"/>
+    </radialGradient>
+    
+    <!-- 墨色渐变 -->
+    <linearGradient id="inkGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2d3436" stop-opacity="0.1"/>
+      <stop offset="50%" stop-color="#636e72" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#2d3436" stop-opacity="0.15"/>
+    </linearGradient>
+    
+    <!-- 毛笔笔触纹理 -->
+    <pattern id="brushTexture" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+      <path d="M20,10 Q30,5 40,15 T60,20 Q70,25 80,15" stroke="#636e72" stroke-width="0.5" fill="none" opacity="0.1"/>
+      <path d="M10,30 Q25,25 35,35 T55,40 Q65,45 75,35" stroke="#636e72" stroke-width="0.3" fill="none" opacity="0.08"/>
+      <path d="M30,60 Q40,55 50,65 T70,70 Q80,75 90,65" stroke="#636e72" stroke-width="0.4" fill="none" opacity="0.06"/>
+    </pattern>
+  </defs>
+  
+  <!-- 背景基调 -->
+  <rect width="100%" height="100%" fill="#faf8f5"/>
+  
+  <!-- 水墨晕染效果 -->
+  <ellipse cx="600" cy="300" rx="800" ry="400" fill="url(#inkWash)" opacity="0.3"/>
+  <ellipse cx="1800" cy="900" rx="600" ry="300" fill="url(#inkWash)" opacity="0.2"/>
+  
+  <!-- 抽象的人物剪影 -->
+  <g opacity="0.08">
+    <!-- 远山 -->
+    <path d="M0,800 Q400,750 800,780 T1600,760 Q2000,740 2400,770 L2400,1350 L0,1350 Z" fill="#636e72" opacity="0.05"/>
+    
+    <!-- 中景建筑轮廓 -->
+    <rect x="200" y="650" width="80" height="180" fill="#2d3436" opacity="0.06" rx="5"/>
+    <rect x="320" y="680" width="60" height="150" fill="#2d3436" opacity="0.04" rx="3"/>
+    <rect x="1400" y="620" width="100" height="210" fill="#2d3436" opacity="0.05" rx="8"/>
+    
+    <!-- 抽象人物 -->
+    <ellipse cx="500" cy="750" rx="25" ry="35" fill="#2d3436" opacity="0.08"/>
+    <rect x="490" y="780" width="20" height="60" fill="#2d3436" opacity="0.06" rx="10"/>
+    
+    <ellipse cx="1200" cy="720" rx="20" ry="30" fill="#2d3436" opacity="0.06"/>
+    <rect x="1192" y="745" width="16" height="50" fill="#2d3436" opacity="0.04" rx="8"/>
+  </g>
+  
+  <!-- 书法笔触装饰 -->
+  <g opacity="0.12">
+    <!-- 飘逸的线条 -->
+    <path d="M100,200 Q300,150 500,200 T900,180 Q1100,160 1300,190" stroke="#2d3436" stroke-width="2" fill="none" opacity="0.1"/>
+    <path d="M1500,400 Q1700,350 1900,400 T2200,380" stroke="#636e72" stroke-width="1.5" fill="none" opacity="0.08"/>
+    
+    <!-- 简约印章风格装饰 -->
+    <rect x="1800" y="150" width="80" height="80" fill="none" stroke="#d63031" stroke-width="2" opacity="0.3" rx="5"/>
+    <circle cx="1840" cy="190" r="8" fill="#d63031" opacity="0.2"/>
+  </g>
+  
+  <!-- 毛笔纹理覆盖 -->
+  <rect width="100%" height="100%" fill="url(#brushTexture)" opacity="0.4"/>
+  
+  <!-- 现代感渐变叠加 -->
+  <rect width="100%" height="100%" fill="url(#inkGradient)"/>
+  
+  <!-- 底部文字区域渐变 -->
+  <rect x="0" y="900" width="2400" height="450" fill="url(#inkGradient)" opacity="0.6"/>
+</svg>
