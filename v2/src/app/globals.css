@@ -1,0 +1,349 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ========================================
+   贝军国画网站 V2 设计系统
+   色系：Stone + Amber（东方美学）
+   ======================================== */
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
+  --font-mono: var(--font-mono);
+
+  /* shadcn/ui 颜色映射 */
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+}
+
+/* ========================================
+   浅色模式（默认）- Stone 色系
+   ======================================== */
+:root {
+  --radius: 0.5rem;
+
+  /* 基础色 - Stone */
+  --background: #FAFAF9;          /* Stone-50 */
+  --foreground: #0C0A09;          /* Stone-950 */
+
+  /* 卡片 */
+  --card: #FFFFFF;
+  --card-foreground: #0C0A09;
+
+  /* 弹窗 */
+  --popover: #FFFFFF;
+  --popover-foreground: #0C0A09;
+
+  /* 主色 - Amber 强调色 */
+  --primary: #CA8A04;             /* Amber-600 */
+  --primary-foreground: #FFFFFF;
+
+  /* 次要色 */
+  --secondary: #F5F5F4;           /* Stone-100 */
+  --secondary-foreground: #1C1917;
+
+  /* 静音色 */
+  --muted: #F5F5F4;               /* Stone-100 */
+  --muted-foreground: #78716C;    /* Stone-500 */
+
+  /* 强调色 */
+  --accent: #FEF3C7;              /* Amber-100 */
+  --accent-foreground: #92400E;   /* Amber-800 */
+
+  /* 危险色 */
+  --destructive: #DC2626;
+
+  /* 边框 */
+  --border: #D6D3D1;              /* Stone-300 */
+  --input: #D6D3D1;
+  --ring: #CA8A04;                /* Amber-600 */
+
+  /* 图表色（如需） */
+  --chart-1: #CA8A04;
+  --chart-2: #78716C;
+  --chart-3: #A8A29E;
+  --chart-4: #D6D3D1;
+  --chart-5: #F5F5F4;
+
+  /* 侧边栏（管理后台） */
+  --sidebar: #FAFAF9;
+  --sidebar-foreground: #0C0A09;
+  --sidebar-primary: #CA8A04;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #FEF3C7;
+  --sidebar-accent-foreground: #92400E;
+  --sidebar-border: #D6D3D1;
+  --sidebar-ring: #CA8A04;
+}
+
+/* ========================================
+   深色模式 - Stone 深色 + Amber 强调
+   ======================================== */
+.dark {
+  --background: #1C1917;          /* Stone-900 */
+  --foreground: #FAFAF9;          /* Stone-50 */
+
+  --card: #292524;                /* Stone-800 */
+  --card-foreground: #FAFAF9;
+
+  --popover: #292524;
+  --popover-foreground: #FAFAF9;
+
+  --primary: #FCD34D;             /* Amber-300 */
+  --primary-foreground: #1C1917;
+
+  --secondary: #44403C;           /* Stone-700 */
+  --secondary-foreground: #FAFAF9;
+
+  --muted: #44403C;
+  --muted-foreground: #A8A29E;    /* Stone-400 */
+
+  --accent: #451A03;              /* Amber-950 */
+  --accent-foreground: #FCD34D;
+
+  --destructive: #EF4444;
+
+  --border: #44403C;              /* Stone-700 */
+  --input: #44403C;
+  --ring: #FCD34D;
+
+  --chart-1: #FCD34D;
+  --chart-2: #A8A29E;
+  --chart-3: #78716C;
+  --chart-4: #57534E;
+  --chart-5: #44403C;
+
+  --sidebar: #1C1917;
+  --sidebar-foreground: #FAFAF9;
+  --sidebar-primary: #FCD34D;
+  --sidebar-primary-foreground: #1C1917;
+  --sidebar-accent: #451A03;
+  --sidebar-accent-foreground: #FCD34D;
+  --sidebar-border: #44403C;
+  --sidebar-ring: #FCD34D;
+}
+
+/* ========================================
+   基础样式层
+   ======================================== */
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* 标题使用衬线字体 */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+  }
+
+  /* 焦点样式 - 可访问性 */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-ring;
+  }
+}
+
+/* ========================================
+   滚动条样式
+   ======================================== */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--muted-foreground);
+  border-radius: 6px;
+  opacity: 0.4;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  opacity: 0.6;
+}
+
+/* ========================================
+   Reduced Motion 支持
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ========================================
+   自定义动画
+   ======================================== */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 水墨晕染效果 - 加载动画 */
+@keyframes ink-spread {
+  0% {
+    opacity: 0.3;
+    filter: blur(20px);
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 0.6;
+    filter: blur(10px);
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0.3;
+    filter: blur(20px);
+    transform: scale(0.8);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.6s ease-out forwards;
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.8s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.4s ease-out forwards;
+}
+
+.animate-ink-spread {
+  animation: ink-spread 2s ease-in-out infinite;
+}
+
+/* ========================================
+   实用工具类
+   ======================================== */
+
+/* 毛玻璃效果 */
+.glass {
+  @apply bg-background/80 backdrop-blur-md;
+}
+
+.dark .glass {
+  @apply bg-background/70;
+}
+
+/* 文字渐变（东方金色） */
+.text-gradient-gold {
+  background: linear-gradient(135deg, #CA8A04 0%, #D97706 50%, #CA8A04 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.dark .text-gradient-gold {
+  background: linear-gradient(135deg, #FCD34D 0%, #FBBF24 50%, #FCD34D 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* 隐藏滚动条但保持可滚动 */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* 图片加载占位 - 水墨风格 */
+.image-placeholder {
+  @apply bg-muted relative overflow-hidden;
+}
+
+.image-placeholder::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 40%, var(--muted-foreground) 0%, transparent 50%);
+  opacity: 0.1;
+  animation: ink-spread 3s ease-in-out infinite;
+}

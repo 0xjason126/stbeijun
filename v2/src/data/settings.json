@@ -1,0 +1,24 @@
+{
+  "site": {
+    "siteName": "贝军国画",
+    "wechatId": "stbeijun0425",
+    "wechatQrCode": "/images/wechat-qr.jpg",
+    "icp": ""
+  },
+  "home": {
+    "hero": {
+      "backgroundImage": "/images/gallery/2025/2025_东进-徐福东渡_70x138.jpg",
+      "title": "贝军国画",
+      "subtitle": "以笔墨记录时代，用水墨讲述故事"
+    },
+    "featuredPaintingIds": [
+      "p001",
+      "p002",
+      "p003",
+      "p004",
+      "p005"
+    ],
+    "artistStatement": "画为心声，笔随意走。在传统与现代之间，寻找属于这个时代的东方美学表达。"
+  },
+  "lastUpdated": "2026-01-16T02:36:29.272Z"
+}
